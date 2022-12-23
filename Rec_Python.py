@@ -85,7 +85,7 @@ def content_based(bookTitle):
             st.success('Could Find any good recommendation')                       
 
 
-@st.cache
+
 
 st.title("Book Recommendation App")
 menu = ["Book lists","Recommendation Search","About"]
