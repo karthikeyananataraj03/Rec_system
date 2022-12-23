@@ -90,7 +90,7 @@ def content_based(bookTitle):
 
 st.title("Book Recommendation App")
 
-image = Image.open('book_image.jpg')
+image = Image.open('books.jpg')
 st.image(image, caption='Pick your choice')
 
 menu = ["Book lists","Recommendation Search","About"]
