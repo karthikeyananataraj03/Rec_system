@@ -12,7 +12,7 @@ from nltk.corpus import stopwords
 import pandas as pd 
 from sklearn.feature_extraction.text import CountVectorizer
 
-@st.cache
+@st.cache(suppress_st_warning=True)
 
 # Load Our Dataset
 def load_data(data):
@@ -44,7 +44,7 @@ def popular_books(df):
     popularBooks=popularBooks.sort_values(by="Popularity",ascending=False)
     return popularBooks[["Book-Title","AverageRatings"]].reset_index(drop=True).head(5)
 
-@st.cache
+@st.cache(suppress_st_warning=True)
 # COntent Based Filtering 
 def content_based(bookTitle):
     bookTitle=str(bookTitle)
