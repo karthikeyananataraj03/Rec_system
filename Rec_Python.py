@@ -82,7 +82,7 @@ def content_based(bookTitle):
             st.success('Pick 3 :'+ books[2])    
           
     else:
-            st.success('Could Find any good recommendation')                       
+            st.success('Could not find any recommendation')                       
 
 
 
