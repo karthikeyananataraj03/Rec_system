@@ -42,7 +42,7 @@ def popular_books(df):
     popularBooks=popularBooks[popularBooks["NumberOfVotes"] >=250]
     popularBooks["Popularity"]=popularBooks.apply(weighted_rate,axis=1)
     popularBooks=popularBooks.sort_values(by="Popularity",ascending=False)
-    return popularBooks[["Book-Title","AverageRatings"]].reset_index(drop=True).head(5)
+    return popularBooks[["Book-Title","AverageRatings"]].reset_index(drop=True).head(50)
 
 @st.cache(suppress_st_warning=True)
 # COntent Based Filtering 
