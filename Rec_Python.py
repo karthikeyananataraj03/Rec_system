@@ -12,7 +12,7 @@ from nltk.corpus import stopwords
 import pandas as pd 
 from sklearn.feature_extraction.text import CountVectorizer
 
-
+@st.cache
 
 # Load Our Dataset
 def load_data(data):
@@ -44,7 +44,7 @@ def popular_books(df):
     popularBooks=popularBooks.sort_values(by="Popularity",ascending=False)
     return popularBooks[["Book-Title","AverageRatings"]].reset_index(drop=True).head(5)
 
-
+@st.cache
 # COntent Based Filtering 
 def content_based(bookTitle):
     bookTitle=str(bookTitle)
@@ -57,9 +57,9 @@ def content_based(bookTitle):
         if bookTitle in rare_books:
             most_common=pd.Series(common_books["Book-Title"].unique()).sample(3).values
             st.success(f'Could Find any good recommendation but here are some top picks') 
-            st.success('Pick 1 '+ most_common[0])
-            st.success('Pick 2' + most_common[1])
-            st.success('Pick 3 '+ most_common[2])  
+            st.success('Pick 1 :'+ most_common[0])
+            st.success('Pick 2 :'+ most_common[1])
+            st.success('Pick 3 :'+ most_common[2])   
         else:
             common_books=common_books.drop_duplicates(subset=["Book-Title"])
             common_books.reset_index(inplace=True)
@@ -77,15 +77,15 @@ def content_based(bookTitle):
                 
                 books.append(common_books[common_books["index"]==similar_booksSorted[i][0]]["Book-Title"].item())
       
-            st.success('Pick 1 '+ books[0])
-            st.success('Pick 2' + books[1])
-            st.success('Pick 3 '+ books[2])  
+            st.success('Pick 1 :'+ books[0])
+            st.success('Pick 2 :'+ books[1])
+            st.success('Pick 3 :'+ books[2])    
           
     else:
             st.success('Could Find any good recommendation')                       
 
 
-
+@st.cache
 
 st.title("Book Recommendation App")
 menu = ["Book lists","Recommendation Search","About"]
@@ -108,4 +108,6 @@ elif choice == "Recommendation Search":
             
 else:
     st.subheader("About")
-    st.text("Built with Streamlit & Pandas")
+    st.text("Built by Karthikeyan Nataraj")
+    st.text("Data: Kaggle Book Recommendation Dataset")
+    
