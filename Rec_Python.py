@@ -7,6 +7,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 import nltk
 from nltk.corpus import stopwords
+from PIL import Image
 
 # Load EDA
 import pandas as pd 
@@ -88,6 +89,10 @@ def content_based(bookTitle):
 
 
 st.title("Book Recommendation App")
+
+image = Image.open('book_image.jpg')
+st.image(image, caption='Pick your choice')
+
 menu = ["Book lists","Recommendation Search","About"]
 choice = st.sidebar.selectbox("Menu",menu)
 df = load_data("Book_recommendation.csv")
