@@ -51,16 +51,15 @@ def content_based(bookTitle):
     
     if bookTitle in df["Book-Title"].values:
         rating_count=pd.DataFrame(df["Book-Title"].value_counts())
-        rare_books=rating_count[rating_count["Book-Title"]<=200].index
+        rare_books=rating_count[rating_count["Book-Title"]<=100].index
         common_books=df[~df["Book-Title"].isin(rare_books)]
         
         if bookTitle in rare_books:
             most_common=pd.Series(common_books["Book-Title"].unique()).sample(3).values
-            print("No Recommendations for this Book ☹️ \n ")
-            print("YOU MAY TRY: \n ")
-            print("{}".format(most_common[0]), "\n")
-            print("{}".format(most_common[1]), "\n")
-            print("{}".format(most_common[2]), "\n")
+            st.success(f'Could Find any good recommendation but here are some top picks') 
+            st.success(f'Pick 1 ${most_common[0]:.2f} people')
+            st.success(f'Pick 2 ${most_common[1]:.2f} people')
+            st.success(f'Pick 3 ${most_common[2]:.2f} people') 
         else:
             common_books=common_books.drop_duplicates(subset=["Book-Title"])
             common_books.reset_index(inplace=True)
@@ -78,14 +77,12 @@ def content_based(bookTitle):
                 
                 books.append(common_books[common_books["index"]==similar_booksSorted[i][0]]["Book-Title"].item())
       
-            print("Recommendations for this Book ☹️ \n ")
-            print("YOU MAY TRY: \n ")
-            print("{}".format(books[0]), "\n")
-            print("{}".format(books[1]), "\n")
-            print("{}".format(books[2]), "\n")    
+            st.success(f'Pick 1 ${books[0]:.2f} people')
+            st.success(f'Pick 2 ${books[1]:.2f} people')
+            st.success(f'Pick 3 ${books[2]:.2f} people')  
           
     else:
-        print('COULD NOT FIND')              
+            st.success(f'Could Find any good recommendation')                       
 
 
 
@@ -105,6 +102,9 @@ elif choice == "Recommendation Search":
     Book_you_have_read = st.text_input('Name of the book you liked reading:')
     if st.button("Recommend"):
             output_books = content_based(Book_you_have_read)
+            
+           
+
             
 else:
     st.subheader("About")
